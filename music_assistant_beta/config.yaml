@@ -1,7 +1,7 @@
 name: Music Assistant (BETA)
 version: 2.8.0b12
 slug: music_assistant_beta
-description: BETA version of the Music Assistant Server.
+description: BETA version of the Music Assistant Server (built from source).
 url: https://music-assistant.io
 arch:
   - amd64
@@ -9,6 +9,7 @@ arch:
 homeassistant_api: true
 discovery:
   - music_assistant
+audio: true
 auth_api: true
 host_network: true
 ingress: true
@@ -28,13 +29,14 @@ backup_exclude:
   - collage_images/*
   - .cache/*
 stage: stable
-image: ghcr.io/music-assistant/server
 tmpfs: true
 options:
   log_level: info
+  server_repo: "lukaszwawrzyk/mass-server@img-cache-fix"
   safe_mode: false
 schema:
   log_level: list(debug|info|warning|error)
+  server_repo: str?
   safe_mode: bool
 privileged:
   - SYS_ADMIN
